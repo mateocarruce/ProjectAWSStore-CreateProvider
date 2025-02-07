@@ -9,11 +9,18 @@ const resolvers = {
                 const provider = await Provider.create(input);
 
                 // Notificar a los otros microservicios
+              //  const instances = [
+             //       'http://localhost:5001/sync-create', // Microservicio de Eliminar
+            //        'http://localhost:5002/sync-create',  // Microservicio de Update
+           //         'http://localhost:5003/sync-create'  // ✅ Microservicio de Leer
+         //       ];
+
                 const instances = [
-                    'http://localhost:5001/sync-create', // Microservicio de Eliminar
-                    'http://localhost:5002/sync-create',  // Microservicio de Update
-                    'http://localhost:5003/sync-create'  // ✅ Microservicio de Leer
+                    'http://provider-delete-container:5001/sync-create', // Microservicio de Eliminar
+                    'http://provider-update-container:5002/sync-create',  // Microservicio de Update
+                    'http://provider-read-container:5003/sync-create'  // Microservicio de Leer
                 ];
+
 
                 for (const instance of instances) {
                     try {
