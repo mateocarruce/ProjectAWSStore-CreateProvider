@@ -107,6 +107,8 @@ const typeDefs = gql`
 const server = new ApolloServer({
     typeDefs,
     resolvers,
+    introspection: true,  // Para permitir pruebas en GraphQL Playground
+    playground: true,      // Habilita GraphQL Playground en producción
 });
 
 // ✅ Sincronizar base de datos y levantar servidores
