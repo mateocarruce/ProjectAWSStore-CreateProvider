@@ -15,12 +15,19 @@ const resolvers = {
            //         'http://localhost:5003/sync-create'  // ✅ Microservicio de Leer
          //       ];
 
-                const instances = [
-                    'http://provider-delete-container:5001/sync-create', // Microservicio de Eliminar
-                    'http://provider-update-container:5002/sync-create',  // Microservicio de Update
-                    'http://provider-read-container:5003/sync-create'  // Microservicio de Leer
-                ];
+         //       const instances = [
+         //           'http://provider-delete-container:5001/sync-create', // Microservicio de Eliminar
+         //           'http://provider-update-container:5002/sync-create',  // Microservicio de Update
+         //           'http://provider-read-container:5003/sync-create'  // Microservicio de Leer
+         //       ];
 
+
+         const instances = [
+            'http://52.45.165.246:5001/sync-create', // Microservicio de Eliminar
+            'http://98.85.71.57:5002/sync-create',  // Microservicio de Update
+            'http://13.216.88.188:5003/sync-create'  // Microservicio de Leer
+        ];
+        
 
                 for (const instance of instances) {
                     try {
