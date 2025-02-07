@@ -9,9 +9,6 @@ const Provider = require('./models/provider');
 const app = express();
 app.use(bodyParser.json());
 
-// ✅ Permitir HTTP en Apollo Server
-process.env.APOLLO_DISABLE_SERVE_OVER_HTTPS = 'true';
-
 // ✅ Endpoint para sincronizar eliminación de proveedores desde el microservicio de Eliminar
 app.post('/sync-delete', async (req, res) => {
     console.log('Solicitud recibida en /sync-delete:', req.body);
@@ -110,11 +107,6 @@ const typeDefs = gql`
 const server = new ApolloServer({
     typeDefs,
     resolvers,
-    csrfPrevention: false,  // ❌ Desactiva protección CSRF
-    cors: {
-        origin: '*',  // 🌍 Permite acceso desde cualquier origen
-        credentials: true
-    }
 });
 
 // ✅ Sincronizar base de datos y levantar servidores
@@ -122,7 +114,7 @@ sequelize.sync() // Sin forzar la recreación
     .then(() => {
         console.log('Database synced!');
         server.listen({ port: 4000 }).then(({ url }) => {
-            console.log(`🚀 Server ready at ${url}`);
+            console.log(`🚀 Server ready olo at ${url}`);
         });
     })
     .catch(err => {
