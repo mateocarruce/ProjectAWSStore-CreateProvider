@@ -1,11 +1,9 @@
-const { ApolloServer } = require('apollo-server-express');
+const { ApolloServer } = require('apollo-server');
 const gql = require('graphql-tag');
 const sequelize = require('./database'); // Importa la conexión de Sequelize
 const resolvers = require('./resolvers'); // Resolvers para GraphQL
 const express = require('express');
 const bodyParser = require('body-parser');
-const fs = require('fs');
-const https = require('https');
 const Provider = require('./models/provider');
 
 const app = express();
@@ -113,22 +111,12 @@ const server = new ApolloServer({
     playground: true,      // Habilita GraphQL Playground en producción
 });
 
-// ✅ Cargar certificados SSL
-const privateKey = fs.readFileSync('/home/ec2-user/key.pem', 'utf8');
-const certificate = fs.readFileSync('/home/ec2-user/cert.pem', 'utf8');
-const credentials = { key: privateKey, cert: certificate };
-
 // ✅ Sincronizar base de datos y levantar servidores
-sequelize.sync()
+sequelize.sync() // Sin forzar la recreación
     .then(() => {
         console.log('Database synced!');
-        server.start().then(() => {
-            server.applyMiddleware({ app });
-
-            // Iniciar servidor HTTPS en el puerto 4000
-            https.createServer(credentials, app).listen(4000, () => {
-                console.log('🚀 Apollo Server uwu running on https://3.214.196.129:4000/graphql');
-            });
+        server.listen({ port: 4000 }).then(({ url }) => {
+            console.log(`🚀 Server ready owosnt at ${url}`);
         });
     })
     .catch(err => {
