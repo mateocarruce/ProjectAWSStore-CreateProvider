@@ -110,6 +110,11 @@ const typeDefs = gql`
 const server = new ApolloServer({
     typeDefs,
     resolvers,
+    csrfPrevention: false,  // ❌ Desactiva protección CSRF
+    cors: {
+        origin: '*',  // 🌍 Permite acceso desde cualquier origen
+        credentials: true
+    }
 });
 
 // ✅ Sincronizar base de datos y levantar servidores
