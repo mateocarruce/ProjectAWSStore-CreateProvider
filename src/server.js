@@ -127,7 +127,7 @@ sequelize.sync()
 
             // Iniciar servidor HTTPS en el puerto 4000
             https.createServer(credentials, app).listen(4000, () => {
-                console.log('🚀 Apollo Server uwusnt running on https://3.214.196.129:4000/graphql');
+                console.log('🚀 Apollo Server uwu running on https://3.214.196.129:4000/graphql');
             });
         });
     })
